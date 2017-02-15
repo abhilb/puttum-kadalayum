@@ -26,24 +26,41 @@ function! s:AsmHelp()
 
 endfunction
 
-function! s:DisplayFileType()
-    echom 'File type is ' . &filetype
-endfunction
-
+"---------------------------------------------------
+"function mapped to the up key
+"display the mini documentation as an echo message.
+"---------------------------------------------------
 function! s:AsmHelpMoveUp()
-    let line = getline('.')
+    let line_num = line('.') - 1
+    let line = getline(line_num)
     if !empty(line)
         let lt1 = split(line, ' ')
-        let op_token = lt1[0]
-        let op_docu_rt = get(s:mini_documentation_map, op_token)
-        echo op_token
+        
+        if len(lt1) >= 1
+            let op_token = lt1[0]
+            let op_docu_rt = get(s:mini_documentation_map, op_token)
+            echo op_docu_rt
+        endif
     endif
     normal! k
 endfunction
 
+"--------------------------------------------------
+"function mapped to the <down> key
+"display the mini documentation as an echo message
+"--------------------------------------------------
 function! s:AsmHelpMoveDown()
-    let line = getline('.')
-    echom line
+    let line_num = line('.') + 1
+    let line = getline(line_num)
+    if !empty(line)
+        let lt1 = split(line, ' ')
+
+        if len(lt1) >= 1
+            let op_token = lt1[0]
+            let op_docu_rt = get(s:mini_documentation_map, op_token)
+            echo op_token
+        endif
+    endif
     normal! j
 endfunction
 
@@ -63,7 +80,7 @@ function! s:AsmHelpInit()
     "all the asm commands
     "text file is written as follows
     "<asm mnemonic> : <one line explanation>
-    "
+    
     let s:lines_list=readfile("mini_documentation.txt")
     
     for s:line in s:lines_list
@@ -71,6 +88,7 @@ function! s:AsmHelpInit()
         let op = s:line_tokens[0]
         let docu = s:line_tokens[1]
         let s:mini_documentation_map[op] = docu
+        echo op
     endfor
 endfunction
 
