@@ -1,4 +1,4 @@
-" File: puttum-kadalayum.vim
+    " File: puttum-kadalayum.vim
 " Author: Abhilash Babu
 " Version: 0.0.2
 " email: abhilashbabuj at gmail dot com
@@ -46,7 +46,13 @@ function! s:AsmHelpMoveUp()
         
         if len(lt1) >= 1
             let op_token = lt1[0]
-            let op_docu_rt = get(s:mini_documentation_map, op_token)
+
+            for [key, value] in items(g:asm_mini_docu)
+                   echo key . ': ' . op_token
+            endfor
+                                        
+            
+            let op_docu_rt = get(g:asm_mini_docu, op_token)
             echo op_docu_rt
         endif
     endif
@@ -65,7 +71,7 @@ function! s:AsmHelpMoveDown()
 
         if len(lt1) >= 1
             let op_token = lt1[0]
-            let op_docu_rt = get(s:mini_documentation_map, op_token)
+            let op_docu_rt = get(g:asm_mini_docu, op_token)
             echo op_token
         endif
     endif
@@ -83,24 +89,6 @@ function! QFixToggle(forced)
     endif
 endfunction
 
-function! s:AsmHelpInit()
-    "read the text file that contains the documentation of 
-    "all the asm commands
-    "text file is written as follows
-    "<asm mnemonic> : <one line explanation>
-    
-    let s:lines_list=readfile("mini_documentation.txt")
-    
-    for s:line in s:lines_list
-        let s:line_tokens = split(s:line, ":")
-        let op = s:line_tokens[0]
-        let docu = s:line_tokens[1]
-        let s:mini_documentation_map[op] = docu
-        echo op
-    endfor
-endfunction
-
-call s:AsmHelpInit()
 
 nmap <leader>ah : call <SID>AsmHelp()<CR>
 noremap <buffer> <F9> :exec 'source ' . bufname('%')<CR>
