@@ -39,21 +39,22 @@ endfunction
 "display the mini documentation as an echo message.
 "---------------------------------------------------
 function! s:AsmHelpMoveUp()
-    let line_num = line('.') - 1
-    let line = getline(line_num)
-    if !empty(line)
-        let lt1 = split(line, ' ')
-        
-        if len(lt1) >= 1
-            let op_token = lt1[0]
-
-            for [key, value] in items(g:asm_mini_docu)
-                   echo key . ': ' . op_token
-            endfor
-                                        
+    if !exists(g:asm_mini_docu)
+        let line_num = line('.') - 1
+        let line = getline(line_num)
+        if !empty(line)
+            let lt1 = split(line, ' ')
             
-            let op_docu_rt = get(g:asm_mini_docu, op_token)
-            echo op_docu_rt
+            if len(lt1) >= 1
+                let op_token = lt1[0]
+    
+                for [key, value] in items(g:asm_mini_docu)
+                       echo key . ': ' . op_token
+                endfor
+                                        
+                let op_docu_rt = get(g:asm_mini_docu, op_token)
+                echo op_docu_rt
+            endif
         endif
     endif
     normal! k
@@ -64,15 +65,17 @@ endfunction
 "display the mini documentation as an echo message
 "--------------------------------------------------
 function! s:AsmHelpMoveDown()
-    let line_num = line('.') + 1
-    let line = getline(line_num)
-    if !empty(line)
-        let lt1 = split(line, ' ')
+    if !exists(g:asm_mini_docu)
+        let line_num = line('.') + 1
+        let line = getline(line_num)
+        if !empty(line)
+            let lt1 = split(line, ' ')
 
-        if len(lt1) >= 1
-            let op_token = lt1[0]
-            let op_docu_rt = get(g:asm_mini_docu, op_token)
-            echo op_token
+            if len(lt1) >= 1
+                let op_token = lt1[0]
+                let op_docu_rt = get(g:asm_mini_docu, op_token)
+                echo op_token
+            endif
         endif
     endif
     normal! j
