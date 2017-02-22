@@ -94,9 +94,9 @@ endfunction
 
 
 nmap <leader>ah : call <SID>AsmHelp()<CR>
-noremap <buffer> <F9> :exec 'source ' . bufname('%')<CR>
-noremap <Up> : call <SID>AsmHelpMoveUp()<CR>
-noremap <Down> : call <SID>AsmHelpMoveDown()<CR>
+noremap <silent> <buffer> <F9> :exec 'source ' . bufname('%')<CR>
+noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
+noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
