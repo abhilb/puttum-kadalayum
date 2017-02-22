@@ -39,7 +39,7 @@ endfunction
 "display the mini documentation as an echo message.
 "---------------------------------------------------
 function! s:AsmHelpMoveUp()
-    if !exists(g:asm_mini_docu)
+    if !exists("g:asm_mini_docu")
         let line_num = line('.') - 1
         let line = getline(line_num)
         if !empty(line)
@@ -65,7 +65,7 @@ endfunction
 "display the mini documentation as an echo message
 "--------------------------------------------------
 function! s:AsmHelpMoveDown()
-    if !exists(g:asm_mini_docu)
+    if !exists("g:asm_mini_docu")
         let line_num = line('.') + 1
         let line = getline(line_num)
         if !empty(line)
