@@ -1,4 +1,4 @@
-    " File: puttum-kadalayum.vim
+" File: puttum-kadalayum.vim
 " Author: Abhilash Babu
 " Version: 0.0.2
 " email: abhilashbabuj at gmail dot com
@@ -92,7 +92,11 @@ function! QFixToggle(forced)
     endif
 endfunction
 
+function! s:AsmMiniHelp()
+    call puttum-kadalayum#load()
+endfunction
 
+nnoremap <leader>mah : call <SID>AsmMiniHelp()<CR>
 nmap <leader>ah : call <SID>AsmHelp()<CR>
 noremap <silent> <buffer> <F9> :exec 'source ' . bufname('%')<CR>
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
