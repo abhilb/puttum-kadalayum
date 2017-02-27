@@ -81,20 +81,18 @@ function! s:AsmHelpMoveDown()
     normal! j
 endfunction
 
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
+command -bang -nargs=? ShowAsmHelp call QFixToggle(<bang>0)
 function! QFixToggle(forced)
-    if exists("g:qfix_width") && a:forced == 0
-        cclose
-        unlet g:qfix_win
+    if exists("g:qfix_win") && a:forced == 0
+        echom g:qfix_win
     else
         copen 1
-        let g:qfix_win = bufnr("$")
+        let g:qfix_win = winnr("$")
+        echom g:qfix_win
     endif
 endfunction
 
-function! s:AsmMiniHelp()
-    call puttum-kadalayum#load()
-endfunction
+command -bang -nargs=? EnableAsmHelp call puttum-kadalayum#test()
 
 nnoremap <leader>mah : call <SID>AsmMiniHelp()<CR>
 nmap <leader>ah : call <SID>AsmHelp()<CR>
