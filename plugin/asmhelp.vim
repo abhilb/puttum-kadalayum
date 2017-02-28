@@ -1,4 +1,4 @@
-" File: puttum-kadalayum.vim
+" File: asmhelp.vim
 " Author: Abhilash Babu
 " Version: 0.0.2
 " email: abhilashbabuj at gmail dot com
@@ -92,13 +92,14 @@ function! QFixToggle(forced)
     endif
 endfunction
 
-command -bang -nargs=? EnableAsmHelp call puttum-kadalayum#test()
+command -bang -nargs=? EnableAsmHelp call asmhelp#test() 
 
 nnoremap <leader>mah : call <SID>AsmMiniHelp()<CR>
 nmap <leader>ah : call <SID>AsmHelp()<CR>
 noremap <silent> <buffer> <F9> :exec 'source ' . bufname('%')<CR>
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
+
 
 let &cpo = s:cpo_save
 unlet s:cpo_save

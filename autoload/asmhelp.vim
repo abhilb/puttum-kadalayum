@@ -2,7 +2,7 @@
 
 echom "Loading the docu"
 
-function! puttum-kadalayum#test()
+function! asmhelp#test()
     echom "Test function!"
 endfunction
 
