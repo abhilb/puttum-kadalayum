@@ -92,7 +92,7 @@ function! QFixToggle(forced)
     endif
 endfunction
 
-command -bang -nargs=? EnableAsmHelp call asmhelp#test() 
+command -bang -nargs=? EnableAsmHelp call asmhelp#load()
 
 nnoremap <leader>mah : call <SID>AsmMiniHelp()<CR>
 nmap <leader>ah : call <SID>AsmHelp()<CR>
