@@ -16,23 +16,6 @@ set cpo&vim
 
 let s:mini_documentation_map = {}
 
-function! s:AsmHelp()
-echom "trying to open the window on the right"
-
-"Open a vertical split    
-"vsplit __asm_help__
-exe "rightbelow vertical new"
-
-"Delete the contents of the buffer
-normal! ggdG
-
-"Set the filetype and buffer type    
-setlocal filetype=text
-setlocal buftype=nofile
-
-call append(0, 'asm help')
-
-endfunction
 
 "---------------------------------------------------
 "function mapped to the up key
@@ -97,9 +80,6 @@ endfunction
 
 command! -bang -nargs=? EnableAsmHelp call asmhelp#load()
 
-nnoremap <leader>mah : call <SID>AsmMiniHelp()<CR>
-nmap <leader>ah : call <SID>AsmHelp()<CR>
-noremap <silent> <buffer> <F9> :exec 'source ' . bufname('%')<CR>
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
 
