@@ -14,9 +14,6 @@ let loaded_asm_help=1
 let s:cpo_save = &cpo
 set cpo&vim
 
-let s:mini_documentation_map = {}
-
-
 "---------------------------------------------------
 "function mapped to the up key
 "display the mini documentation as an echo message.
@@ -67,7 +64,6 @@ endif
 normal! j
 endfunction
 
-command -bang -nargs=? ShowAsmHelp call QFixToggle(<bang>0)
 function! QFixToggle(forced)
 if exists("g:qfix_win") && a:forced == 0
     echom g:qfix_win
@@ -78,7 +74,16 @@ else
 endif
 endfunction
 
-command! -bang -nargs=? EnableAsmHelp call asmhelp#load()
+function! s:ToggleAsmMiniHelp()
+    if exists("g:asm_mini_docu")
+        unlet g:asm_mini_docu
+    else
+        call asmhelp#load()
+    endif
+endfunction
+
+command! -bang -nargs=? AsmMiniHelp call <SID>ToggleAsmMiniHelp()
+command! -bang -nargs=? ShowAsmHelp call QFixToggle(<bang>0)
 
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
