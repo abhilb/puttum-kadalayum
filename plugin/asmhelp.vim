@@ -1,6 +1,6 @@
 " File: asmhelp.vim
 " Author: Abhilash Babu
-" Version: 0.0.2
+" Version: 0.1.0
 " email: abhilashbabuj at gmail dot com
 " Copyright: Copyright (c) 2017-2018 Abhilash Babu
 " License: Free software.
