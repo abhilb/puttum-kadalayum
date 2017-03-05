@@ -91,7 +91,16 @@ function! ToggleAsmHelp()
 endfunction
 
 function! s:CloseAsmHelp()
+    let helpwinnr = bufwinnr('__asm_help_win__')
+    if helpwinnr == -1
+        return 
+    endif
 
+    if winnr() == helpwinnr
+        close
+    else
+        
+    endif
 endfunction
 
 function! s:OpenAsmHelp()
