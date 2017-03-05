@@ -64,14 +64,47 @@ endif
 normal! j
 endfunction
 
-function! QFixToggle(forced)
-if exists("g:qfix_win") && a:forced == 0
-    echom g:qfix_win
-else
-    copen 1
-    let g:qfix_win = winnr("$")
-    echom g:qfix_win
-endif
+" ==============================================================
+" The below function is from tagbar.vim
+" https://github.com/tagbar/blob/master/autoload/tagbar.vim
+" ==============================================================
+function! s:goto_win(winnr, ...) abort
+    let cmd = type(a:winnr) == type(0) ? a:winnr . 'wincmd w'
+                                    \: 'wincmd ' . a:winnr
+    let noauto = a:0 ? a:1 : 0
+
+    if noauto
+        noautocmd execute cmd
+    else
+        execute cmd
+    endif
+
+endfunction
+
+function! ToggleAsmHelp()
+    let helpwinnr = bufwinnr('__asm_help_win__')
+    if helpwinnr != -1
+        call s:CloseAsmHelp()
+        return
+    endif
+    call s:OpenAsmHelp()
+endfunction
+
+function! s:CloseAsmHelp()
+
+endfunction
+
+function! s:OpenAsmHelp()
+    let helpwinnr = bufwinnr('__asm_help_win__')
+    if helpwinnr != -1
+        if winnr() != helpwinnr
+            call s:goto_win(helpwinnr)
+        endif
+        echom "help window already open"
+        return
+    endif
+
+    exe 'silent keepalt botright vertical split __asm_help_win__'
 endfunction
 
 function! s:ToggleAsmMiniHelp()
@@ -82,8 +115,8 @@ function! s:ToggleAsmMiniHelp()
     endif
 endfunction
 
-command! -bang -nargs=? AsmMiniHelp call <SID>ToggleAsmMiniHelp()
-command! -bang -nargs=? ShowAsmHelp call QFixToggle(<bang>0)
+command! -bang -nargs=? AsmMiniHelp call ToggleAsmMiniHelp()
+command! -bang -nargs=? AsmHelp call ToggleAsmHelp()
 
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
