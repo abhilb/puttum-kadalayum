@@ -90,21 +90,6 @@ function! ToggleAsmHelp()
     call s:OpenAsmHelp()
 endfunction
 
-
-function! s:mark_window() abort
-    let w:help_win_mark = 1
-endfunction
-
-function! s:goto_markedwin()
-    for window in range(1, winnr('$'))
-        call s:goto_win(window)
-        if exists('w:help_win_mark')
-            unlet w:help_win_mark
-            break
-        endif
-    endfor
-endfunction
-
 function! s:CloseAsmHelp()
     let helpwinnr = bufwinnr('__asm_help_win__')
     if helpwinnr == -1
