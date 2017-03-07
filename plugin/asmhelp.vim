@@ -54,7 +54,7 @@ if exists("g:asm_mini_docu")
             let op_token = lt1[0]
             let op_docu_rt = get(g:asm_mini_docu, op_token)
             if op_docu_rt == "0"
-                echohl ErrorMsg | echo "Documentation not available for this instruction!!!" | echohl None
+                echohl asmhelpmsg | echo "Documentation not available for this instruction!!!" | echohl None
             else
                 echo op_docu_rt
             endif
@@ -142,13 +142,15 @@ function! s:ToggleAsmMiniHelp()
     endif
 endfunction
 
-command! -bang -nargs=? AsmMiniHelp call ToggleAsmMiniHelp()
+command! -bang -nargs=? AsmMiniHelp call s:ToggleAsmMiniHelp()
 command! -bang -nargs=? AsmHelp call ToggleAsmHelp()
 
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
 
 highlight todomsg ctermbg=red guibg=red ctermfg=yellow guifg=yellow term=bold
+
+highlight asmhelpmsg ctermbg=green guibg=green ctermfg=blue guifg= blue term=bold
 
 match todomsg /@todo/
 
