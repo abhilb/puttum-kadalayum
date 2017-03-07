@@ -114,7 +114,10 @@ function! s:CloseAsmHelp()
     if winnr() == helpwinnr
         close
     else
-        
+        " @todo
+        " mark the help window
+        " go to the marked window
+        " close the marked window..        
     endif
 endfunction
 
@@ -144,6 +147,10 @@ command! -bang -nargs=? AsmHelp call ToggleAsmHelp()
 
 noremap <silent> <Up> : call <SID>AsmHelpMoveUp()<CR>
 noremap <silent> <Down> : call <SID>AsmHelpMoveDown()<CR>
+
+highlight todomsg ctermbg=red guibg=red ctermfg=yellow guifg=yellow term=bold
+
+match todomsg /@todo/
 
 
 let &cpo = s:cpo_save
