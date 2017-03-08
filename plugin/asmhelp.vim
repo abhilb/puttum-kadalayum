@@ -31,7 +31,7 @@ if exists("g:asm_mini_docu")
             if op_docu_rt == "0"
                 echohl ErrorMsg | echo "Documentation not available for this instruction!!!" | echohl None
             else
-                echo op_docu_rt
+                echohl asmhelpmsg |  echo op_docu_rt | echohl None
             endif
         endif
     endif
@@ -54,9 +54,9 @@ if exists("g:asm_mini_docu")
             let op_token = lt1[0]
             let op_docu_rt = get(g:asm_mini_docu, op_token)
             if op_docu_rt == "0"
-                echohl asmhelpmsg | echo "Documentation not available for this instruction!!!" | echohl None
+                echohl ErrorMsg | echo "Documentation not available for this instruction!!!" | echohl None
             else
-                echo op_docu_rt
+                echohl asmhelpmsg | echo op_docu_rt | echohl None
             endif
         endif
     endif
