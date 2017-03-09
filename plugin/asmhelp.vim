@@ -82,12 +82,16 @@ function! s:goto_win(winnr, ...) abort
 endfunction
 
 function! ToggleAsmHelp()
-    let helpwinnr = bufwinnr('__asm_help_win__')
-    if helpwinnr != -1
-        call s:CloseAsmHelp()
-        return
+    let buf_file_type = &filetype
+
+    if buf_file_type == "asm"
+        let helpwinnr = bufwinnr('__asm_help_win__')
+        if helpwinnr != -1
+            call s:CloseAsmHelp()
+            return
+        endif
+        call s:OpenAsmHelp()
     endif
-    call s:OpenAsmHelp()
 endfunction
 
 
