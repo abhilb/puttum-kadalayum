@@ -135,10 +135,13 @@ function! s:OpenAsmHelp()
 endfunction
 
 function! s:ToggleAsmMiniHelp()
-    if exists("g:asm_mini_docu")
-        unlet g:asm_mini_docu
-    else
-        call asmhelp#load()
+    let buf_file_type = &filetype
+    if buf_file_type == "asm"
+        if exists("g:asm_mini_docu")
+            unlet g:asm_mini_docu
+        else
+            call asmhelp#load()
+        endif
     endif
 endfunction
 
